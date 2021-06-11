@@ -97,7 +97,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -148,10 +148,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file('life-counter.keystore')
+            storePassword System.console().readLine("\nKeystore password:")
+            keyAlias System.console().readLine("\nAlias: ")
+            keyPassword System.console().readLine("\Alias password: ")
         }
     }
     buildTypes {
