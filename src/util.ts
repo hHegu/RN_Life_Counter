@@ -1,5 +1,3 @@
-import { MTGColor } from './constants/colors'
-
 export const getRotation = (playerId: number, numOfPlayers: number) => {
   if (numOfPlayers === 6) {
     return 90

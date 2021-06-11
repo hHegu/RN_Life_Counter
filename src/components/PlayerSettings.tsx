@@ -39,9 +39,8 @@ const PlayerSettings = ({
         style={[
           styles.colorSelections,
           { flexDirection: isVertical ? 'row' : 'column' },
-        ]}
-      >
-        {Object.values(colors).map((color) => (
+        ]}>
+        {Object.values(colors).map(color => (
           <ColorSelection
             key={color.secondaryColor.toString()}
             color={color}

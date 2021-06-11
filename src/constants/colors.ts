@@ -1,11 +1,11 @@
-import { rgbAsString } from "../util"
+import { rgbAsString } from '../util'
 
 export type MTGColor = {
   mainColor: string
   secondaryColor: string
 }
 
-const MTG_COLORS =  {
+const MTG_COLORS = {
   red: {
     secondaryColor: rgbAsString([235, 159, 130]),
     mainColor: rgbAsString([211, 32, 42]),
@@ -36,7 +36,7 @@ const COLORS = {
   defaultDark: {
     secondaryColor: '#212121',
     mainColor: '#ffffff',
-  }
+  },
 }
 
-export default {...MTG_COLORS, ...COLORS}
+export default { ...MTG_COLORS, ...COLORS }

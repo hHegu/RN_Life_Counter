@@ -3,7 +3,7 @@ import gameReducer from './features/game/game'
 
 export const store = configureStore({
   reducer: {
-    game: gameReducer
+    game: gameReducer,
   },
 })
 

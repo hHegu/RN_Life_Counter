@@ -26,7 +26,7 @@ const Settings = ({
   visible: boolean
   setVisible: (visible: boolean) => void
 }) => {
-  const { startingLife, playerCount } = useAppSelector((state) => state.game)
+  const { startingLife, playerCount } = useAppSelector(state => state.game)
   const dispatch = useAppDispatch()
   return (
     <>
@@ -35,8 +35,7 @@ const Settings = ({
         <Animatable.View
           style={styles.container}
           animation={visible ? 'flipInX' : 'flipOutX'}
-          duration={250}
-        >
+          duration={250}>
           <IconButton
             onPress={() => dispatch(toggleStartingLife())}
             icon={faHeart}

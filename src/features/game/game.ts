@@ -25,7 +25,7 @@ const getPlayers = ({
 
 const getDefaultPlayer = (life: number, id: number) => ({
   life,
-  color: colors.default,
+  color: usingLightTheme ? colors.default : colors.defaultDark,
   id,
 })
 
@@ -50,7 +50,6 @@ const MAX_STARTING_LIFE_TOTAL = 40
 const MIN_STARTING_LIFE_TOTAL = 20
 const STARTING_LIFE_STEP = 10
 
-
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
@@ -59,13 +58,13 @@ export const gameSlice = createSlice({
       const player = action.payload
       state.players[player.id] = player
     },
-    resetGame: (state) => {
-      state.players = state.players.map((player) => ({
+    resetGame: state => {
+      state.players = state.players.map(player => ({
         ...player,
         life: state.startingLife,
       }))
     },
-    toggleStartingLife: (state) => {
+    toggleStartingLife: state => {
       const { startingLife } = state
       const newStartingLife =
         startingLife < MAX_STARTING_LIFE_TOTAL
@@ -73,12 +72,12 @@ export const gameSlice = createSlice({
           : MIN_STARTING_LIFE_TOTAL
 
       state.startingLife = newStartingLife
-      state.players = state.players.map((player) => ({
+      state.players = state.players.map(player => ({
         ...player,
         life: state.startingLife,
       }))
     },
-    togglePlayerCount: (state) => {
+    togglePlayerCount: state => {
       const { playerCount, startingLife } = state
       const newPlayerCount =
         playerCount < MAX_PLAYER_COUNT ? playerCount + 1 : MIN_PLAYER_COUNT
@@ -89,7 +88,7 @@ export const gameSlice = createSlice({
         state.players = state.players.slice(0, 2)
       }
     },
-    randomizeFirstPlayer: (state) => {
+    randomizeFirstPlayer: state => {
       state.firstPlayerId = Math.floor(Math.random() * state.playerCount)
     },
     setFirstPlayer: (state, action: PayloadAction<number | null>) => {
