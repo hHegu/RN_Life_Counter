@@ -1,0 +1,9 @@
+{
+  "name": "LifeCounter",
+  "displayName": "Life Counter",
+  "orientation": "portrait",
+  "version": "0.0.1",
+  "androidNavigationBar": {
+    "visible": "immersive"
+  }
+}
