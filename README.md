@@ -4,11 +4,11 @@ Open-source fan-made Magic the Gathering life counter made with React Native.
 ![Screenshot](./images/screenshot.jpg)
 
 ## Features:
-- Supports up to 6 players
+- Supports up to 6 players:
 
-![Screenshot](./images/6_players.jpg):
+![Screenshot](./images/6_players.jpg)
 
-- Start the game with 20, 30 or 40 life
+- Start the game with 20, 30 or 40 life.
 
 - Players can select a color or a combination of different MTG colors:
 
