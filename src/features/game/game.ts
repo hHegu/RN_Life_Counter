@@ -1,8 +1,8 @@
+import { DEFAULT_THEMES, MTGColor, THEMES } from '../../constants/colors'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { Appearance } from 'react-native'
 import Player from '../../types/player'
-import { THEMES } from '../../constants/colors'
 
 const usingLightTheme = Appearance.getColorScheme() === 'light'
 
@@ -18,14 +18,14 @@ const getPlayers = ({
     .map((_val, id) => ({
       id,
       life,
-      color: usingLightTheme ? THEMES.default : THEMES.defaultDark,
+      colors: usingLightTheme ? [THEMES.default] : [THEMES.defaultDark],
     }))
   return players
 }
 
 const getDefaultPlayer = (life: number, id: number) => ({
   life,
-  color: usingLightTheme ? THEMES.default : THEMES.defaultDark,
+  colors: usingLightTheme ? [THEMES.default] : [THEMES.defaultDark],
   id,
 })
 
@@ -34,6 +34,11 @@ type GameState = {
   startingLife: number
   playerCount: number
   firstPlayerId: number | null
+}
+
+type ToggleColorType = {
+  playerId: number
+  color: MTGColor
 }
 
 const initialState: GameState = {
@@ -57,6 +62,52 @@ export const gameSlice = createSlice({
     editPlayer: (state, action: PayloadAction<Player>) => {
       const player = action.payload
       state.players[player.id] = player
+    },
+    togglePlayerColor: (state, action: PayloadAction<ToggleColorType>) => {
+      const { color, playerId } = action.payload
+
+      const defaultThemes = Object.values(DEFAULT_THEMES)
+
+      const compareColorToPayload = (c: MTGColor) =>
+        c.mainColor === color.mainColor &&
+        c.secondaryColor === color.secondaryColor
+
+      const compareColorToDefaultThemes = (c: MTGColor) =>
+        defaultThemes.findIndex(
+          d =>
+            d.mainColor === c.mainColor && d.secondaryColor === c.secondaryColor
+        ) !== -1
+
+      if (Object.values(DEFAULT_THEMES).find(compareColorToPayload)) {
+        state.players[playerId].colors = [color]
+      } else {
+        state.players[playerId].colors = state.players[playerId].colors.filter(
+          c => !compareColorToDefaultThemes(c)
+        )
+      }
+
+      const currentPlayer = state.players[playerId]
+      const colorIndex = currentPlayer.colors.findIndex(compareColorToPayload)
+
+      if (colorIndex !== -1) {
+        if (currentPlayer.colors.length === 1) {
+          return
+        }
+        state.players[playerId].colors = state.players[playerId].colors.filter(
+          c => !compareColorToPayload(c)
+        )
+      } else {
+        state.players[playerId].colors.push(color)
+      }
+    },
+    setPrimaryColor: (state, action: PayloadAction<ToggleColorType>) => {
+      const { color, playerId } = action.payload
+      const filteredColors = state.players[playerId].colors.filter(
+        c =>
+          c.mainColor !== color.mainColor &&
+          c.secondaryColor !== color.secondaryColor
+      )
+      state.players[playerId].colors = [color, ...filteredColors]
     },
     resetGame: state => {
       state.players = state.players.map(player => ({
@@ -104,6 +155,8 @@ export const {
   toggleStartingLife,
   randomizeFirstPlayer,
   setFirstPlayer,
+  togglePlayerColor,
+  setPrimaryColor,
 } = gameSlice.actions
 
 export default gameSlice.reducer

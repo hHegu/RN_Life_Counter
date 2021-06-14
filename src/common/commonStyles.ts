@@ -12,6 +12,13 @@ export default StyleSheet.create({
     shadowRadius: 1,
     elevation: 4,
   },
+  fillContentAbsolute: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+  },
   defaultFontSize: {
     fontSize: 64,
   },

@@ -30,8 +30,8 @@ const LifeCounter = ({
 
   const height = playerCount > 4 ? '33.3%' : '50%'
 
-  const { life, color } = player
-  const { mainColor, secondaryColor } = color
+  const { life, colors } = player
+  const { mainColor, secondaryColor } = colors[0]
 
   const lifeCounter = (
     <>
@@ -77,6 +77,33 @@ const LifeCounter = ({
           backgroundColor: secondaryColor,
         },
       ]}>
+      <View
+        style={[
+          commonStyles.fillContentAbsolute,
+          {
+            transform: [{ rotateZ: '65deg' }],
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        ]}>
+        <View
+          style={{
+            width: isVertical ? '250%' : '250%',
+            height: isVertical ? '150%' : '120%',
+          }}>
+          {colors.map(color => (
+            <View
+              key={`bg-${player.id}${color.mainColor}${color.secondaryColor}`}
+              style={{
+                backgroundColor: color.secondaryColor,
+                flex: 1,
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          ))}
+        </View>
+      </View>
       {isSettingsVisible ? (
         <PlayerSettings
           player={player}
@@ -111,6 +138,7 @@ const styles = StyleSheet.create({
     height: '50%',
     borderWidth: 2,
     borderRadius: 12,
+    overflow: 'hidden',
   },
 })
 

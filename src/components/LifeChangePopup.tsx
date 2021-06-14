@@ -17,7 +17,7 @@ const LifeChangePopup = ({
   rotation,
   isVertical,
 }: LifeChangePopupType) => {
-  const { life, color } = player
+  const { life, colors: color } = player
   const [lifeChange, setLifeChange] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const [comparedLife, setComparedLife] = useState(life)
@@ -66,7 +66,7 @@ const LifeChangePopup = ({
             paddingVertical: 8,
             borderRadius: 100,
             textAlign: 'center',
-            color: color.mainColor,
+            color: color[0].mainColor,
           },
           commonStyles.textShadow,
         ]}>

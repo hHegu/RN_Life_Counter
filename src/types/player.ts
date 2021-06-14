@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 import { MTGColor } from '../constants/colors'
 
 type Player = {
   id: number
   life: number
-  color: MTGColor
+  colors: MTGColor[]
 }
 
 export default Player

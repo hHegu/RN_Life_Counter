@@ -1,11 +1,13 @@
+import { DEFAULT_THEMES, MTG_THEMES } from '../constants/colors'
+import { setPrimaryColor, togglePlayerColor } from '../features/game/game'
+
 import ColorSelection from './ColorSelection'
 import IconButton from './IconButton'
+import Overlay from './Overlay'
 import Player from '../types/player'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { THEMES } from '../constants/colors'
 import { View } from 'react-native-animatable'
-import { editPlayer } from '../features/game/game'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useAppDispatch } from '../hooks'
 
@@ -24,8 +26,61 @@ const PlayerSettings = ({
 }: PlayerSettingsType) => {
   const dispatch = useAppDispatch()
 
+  const mtgColorSettings = (
+    <View
+      style={[
+        styles.colorSelections,
+        {
+          flexDirection: isVertical ? 'row' : 'column',
+          height: isVertical ? 'auto' : '100%',
+          width: isVertical ? '100%' : 'auto',
+        },
+      ]}>
+      {Object.values(MTG_THEMES).map(color => (
+        <ColorSelection
+          key={color.secondaryColor.toString()}
+          color={color}
+          onPress={() => {
+            dispatch(togglePlayerColor({ playerId: player.id, color }))
+          }}
+          onLongPress={() => {
+            dispatch(setPrimaryColor({ playerId: player.id, color }))
+          }}
+          selected={player.colors.includes(color)}
+        />
+      ))}
+    </View>
+  )
+
+  const defaultColorSettings = (
+    <View
+      style={[
+        styles.colorSelections,
+        {
+          flexDirection: isVertical ? 'row' : 'column',
+          height: isVertical ? 'auto' : '100%',
+          width: isVertical ? '100%' : 'auto',
+        },
+      ]}>
+      {Object.values(DEFAULT_THEMES).map(color => (
+        <ColorSelection
+          key={color.secondaryColor.toString()}
+          color={color}
+          onPress={() => {
+            dispatch(togglePlayerColor({ playerId: player.id, color }))
+          }}
+          onLongPress={() => {
+            dispatch(setPrimaryColor({ playerId: player.id, color }))
+          }}
+          selected={player.colors.includes(color)}
+        />
+      ))}
+    </View>
+  )
+
   return (
     <View style={[styles.container]}>
+      <Overlay onPress={onClose} visible={true} />
       <IconButton
         icon={faTimes}
         onPress={onClose}
@@ -33,24 +88,26 @@ const PlayerSettings = ({
           styles.closeButton,
           { transform: [{ rotateZ: `${rotation}deg` }] },
         ]}
-        color={player.color.mainColor}
+        color={player.colors[0].mainColor}
       />
       <View
         style={[
-          styles.colorSelections,
-          { flexDirection: isVertical ? 'row' : 'column' },
+          styles.colorSelectionsContainer,
+          {
+            flexDirection: isVertical ? 'row' : 'column',
+          },
         ]}>
-        {Object.values(THEMES).map(color => (
-          <ColorSelection
-            key={color.secondaryColor.toString()}
-            color={color}
-            onPress={() => {
-              dispatch(editPlayer({ ...player, color }))
-              onClose()
-            }}
-            disabled={color === player.color}
-          />
-        ))}
+        {isVertical ? (
+          <>
+            {defaultColorSettings}
+            {mtgColorSettings}
+          </>
+        ) : (
+          <>
+            {mtgColorSettings}
+            {defaultColorSettings}
+          </>
+        )}
       </View>
     </View>
   )
@@ -63,19 +120,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flex: 1,
-    backgroundColor: 'rgba(0,0,0, 0.2)',
   },
   closeButton: {
     position: 'absolute',
     top: 0,
     right: 8,
   },
+  colorSelectionsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
   colorSelections: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    padding: 8,
-    margin: 8,
     flexWrap: 'wrap',
   },
 })

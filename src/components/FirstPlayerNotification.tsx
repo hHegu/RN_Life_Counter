@@ -56,11 +56,11 @@ const FirstPlayerNotification = ({
             paddingHorizontal: 8,
             paddingVertical: 8,
             borderRadius: 100,
+            borderWidth: 2,
             width: 120,
             textAlign: 'center',
             backgroundColor: COLORS.black,
             color: COLORS.white,
-            borderWidth: 2,
           },
         ]}>
         You go first!

@@ -9,16 +9,18 @@ import commonStyles from '../common/commonStyles'
 
 const ColorSelection = ({
   color,
-  disabled,
+  selected,
   onPress,
+  onLongPress,
 }: {
   color: MTGColor
-  disabled: boolean
+  selected: boolean
   onPress: () => void
+  onLongPress: () => void
 }) => (
   <TouchableOpacity
     onPress={onPress}
-    disabled={disabled}
+    onLongPress={onLongPress}
     style={styles.container}>
     <Animatable.View
       animation="zoomIn"
@@ -28,8 +30,9 @@ const ColorSelection = ({
         commonStyles.shadow,
         {
           backgroundColor: color.secondaryColor,
-          opacity: disabled ? 0.7 : 1,
-          borderWidth: disabled ? 4 : StyleSheet.hairlineWidth,
+          opacity: selected ? 0.7 : 1,
+          borderWidth: selected ? 4 : StyleSheet.hairlineWidth,
+          borderColor: color.mainColor,
         },
       ]}>
       <View style={[styles.lower, { backgroundColor: color.mainColor }]} />
