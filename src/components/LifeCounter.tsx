@@ -89,7 +89,7 @@ const LifeCounter = ({
         <View
           style={{
             width: isVertical ? '250%' : '250%',
-            height: isVertical ? '150%' : '120%',
+            height: isVertical ? '180%' : '120%',
           }}>
           {colors.map(color => (
             <View
