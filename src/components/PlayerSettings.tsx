@@ -3,8 +3,8 @@ import IconButton from './IconButton'
 import Player from '../types/player'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { THEMES } from '../constants/colors'
 import { View } from 'react-native-animatable'
-import colors from '../constants/colors'
 import { editPlayer } from '../features/game/game'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useAppDispatch } from '../hooks'
@@ -40,7 +40,7 @@ const PlayerSettings = ({
           styles.colorSelections,
           { flexDirection: isVertical ? 'row' : 'column' },
         ]}>
-        {Object.values(colors).map(color => (
+        {Object.values(THEMES).map(color => (
           <ColorSelection
             key={color.secondaryColor.toString()}
             color={color}

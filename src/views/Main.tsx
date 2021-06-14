@@ -3,11 +3,11 @@ import { StyleSheet, View } from 'react-native'
 import { getIsFlipped, getIsVertical, getRotation } from '../../src/util'
 import { useAppDispatch, useAppSelector } from '../../src/hooks'
 
+import { COLORS } from '../constants/colors'
 import IconButton from '../../src/components/IconButton'
 import LifeCounter from '../../src/components/LifeCounter'
 import Player from '../types/player'
 import Settings from '../../src/components/Settings'
-import colors from '../constants/colors'
 import { editPlayer } from '../../src/features/game/game'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
 
@@ -32,7 +32,7 @@ export default function Main() {
         icon={faCog}
         onPress={() => setIsSettingsVisible(true)}
         style={styles.settingsIcon}
-        color={colors.defaultDark.mainColor}
+        color={COLORS.white}
         iconSize={32}
       />
       <Settings visible={isSettingsVisible} setVisible={setIsSettingsVisible} />

@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { Appearance } from 'react-native'
 import Player from '../../types/player'
-import colors from '../../constants/colors'
+import { THEMES } from '../../constants/colors'
 
 const usingLightTheme = Appearance.getColorScheme() === 'light'
 
@@ -18,14 +18,14 @@ const getPlayers = ({
     .map((_val, id) => ({
       id,
       life,
-      color: usingLightTheme ? colors.default : colors.defaultDark,
+      color: usingLightTheme ? THEMES.default : THEMES.defaultDark,
     }))
   return players
 }
 
 const getDefaultPlayer = (life: number, id: number) => ({
   life,
-  color: usingLightTheme ? colors.default : colors.defaultDark,
+  color: usingLightTheme ? THEMES.default : THEMES.defaultDark,
   id,
 })
 

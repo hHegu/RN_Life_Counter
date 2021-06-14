@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
+import { COLORS } from '../constants/colors'
 import FirstPlayerNotification from './FirstPlayerNotification'
 import LifeButton from './LifeButton'
 import LifeChangePopup from './LifeChangePopup'
@@ -25,6 +26,8 @@ const LifeCounter = ({
   const playerCount = useAppSelector(state => state.game.playerCount)
   const [isSettingsVisible, setIsSettingsVisible] = useState(false)
 
+  const isSmall = playerCount === 6 || (playerCount === 5 && player.id !== 4)
+
   const height = playerCount > 4 ? '33.3%' : '50%'
 
   const { life, color } = player
@@ -37,6 +40,7 @@ const LifeCounter = ({
         icon="-"
         rotation={rotation}
         color={mainColor}
+        isSmall={isSmall}
       />
       <TouchableOpacity onPress={() => setIsSettingsVisible(true)}>
         <Text
@@ -56,6 +60,7 @@ const LifeCounter = ({
         icon="+"
         rotation={rotation}
         color={mainColor}
+        isSmall={isSmall}
       />
     </>
   )
@@ -98,14 +103,14 @@ const LifeCounter = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     borderStyle: 'solid',
     borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     height: '50%',
-    borderWidth: 1,
-    borderRadius: 8,
+    borderWidth: 2,
+    borderRadius: 12,
   },
 })
 

@@ -8,9 +8,17 @@ type LifeButtonType = {
   rotation: number
   color: string
   onPress: () => void
+  isSmall?: boolean
 }
 
-const LifeButton = ({ icon, rotation, onPress, color }: LifeButtonType) => {
+const LifeButton = ({
+  icon,
+  rotation,
+  onPress,
+  color,
+  isSmall,
+}: LifeButtonType) => {
+  const fontSize = icon === '+' ? 64 : 80
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -24,7 +32,8 @@ const LifeButton = ({ icon, rotation, onPress, color }: LifeButtonType) => {
         style={[
           {
             color,
-            fontSize: icon === '+' ? 64 : 80,
+            fontSize: isSmall ? fontSize * 0.7 : fontSize,
+            marginBottom: icon === '+' ? 0 : 8,
           },
           commonStyles.textShadow,
         ]}>

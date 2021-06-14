@@ -5,38 +5,57 @@ export type MTGColor = {
   secondaryColor: string
 }
 
-const MTG_COLORS = {
+const COLORS = {
+  mountain: rgbAsString([211, 32, 42]),
+  forest: rgbAsString([0, 115, 62]),
+  island: rgbAsString([14, 104, 171]),
+  swamp: rgbAsString([21, 11, 0]),
+  plains: rgbAsString([249, 250, 244]),
+
+  bgMountain: rgbAsString([235, 159, 130]),
+  bgForest: rgbAsString([196, 211, 202]),
+  bgIsland: rgbAsString([179, 206, 234]),
+  bgSwamp: rgbAsString([166, 159, 157]),
+  bgPlains: rgbAsString([248, 231, 185]),
+
+  black: '#212121',
+  white: '#ffffff',
+}
+
+const MTG_THEMES = {
   red: {
-    secondaryColor: rgbAsString([235, 159, 130]),
-    mainColor: rgbAsString([211, 32, 42]),
+    secondaryColor: COLORS.bgMountain,
+    mainColor: COLORS.mountain,
   },
   green: {
-    secondaryColor: rgbAsString([196, 211, 202]),
-    mainColor: rgbAsString([0, 115, 62]),
+    secondaryColor: COLORS.bgForest,
+    mainColor: COLORS.forest,
   },
   blue: {
-    secondaryColor: rgbAsString([179, 206, 234]),
-    mainColor: rgbAsString([14, 104, 171]),
+    secondaryColor: COLORS.bgIsland,
+    mainColor: COLORS.island,
   },
   black: {
-    secondaryColor: rgbAsString([166, 159, 157]),
-    mainColor: rgbAsString([21, 11, 0]),
+    secondaryColor: COLORS.bgSwamp,
+    mainColor: COLORS.swamp,
   },
   white: {
-    secondaryColor: rgbAsString([248, 231, 185]),
-    mainColor: rgbAsString([249, 250, 244]),
+    secondaryColor: COLORS.bgPlains,
+    mainColor: COLORS.black,
   },
 }
 
-const COLORS = {
+const DEFAULT_THEMES = {
   default: {
-    secondaryColor: rgbAsString([255, 255, 255]),
-    mainColor: rgbAsString([0, 0, 0]),
+    secondaryColor: COLORS.white,
+    mainColor: COLORS.black,
   },
   defaultDark: {
-    secondaryColor: '#212121',
-    mainColor: '#ffffff',
+    secondaryColor: COLORS.black,
+    mainColor: COLORS.white,
   },
 }
 
-export default { ...MTG_COLORS, ...COLORS }
+const THEMES = { ...MTG_THEMES, ...DEFAULT_THEMES }
+
+export { THEMES, COLORS }

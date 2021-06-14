@@ -18,6 +18,7 @@ import IconButton from './IconButton'
 import Overlay from '../../src/components/Overlay'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import commonStyles from '../common/commonStyles'
 
 const Settings = ({
   visible,
@@ -33,7 +34,7 @@ const Settings = ({
       <Overlay onPress={() => setVisible(false)} visible={visible} />
       {
         <Animatable.View
-          style={styles.container}
+          style={[styles.container, commonStyles.shadow]}
           animation={visible ? 'flipInX' : 'flipOutX'}
           duration={250}>
           <IconButton

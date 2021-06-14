@@ -2,6 +2,7 @@ import * as Animatable from 'react-native-animatable'
 
 import React, { useEffect, useState } from 'react'
 
+import { COLORS } from '../constants/colors'
 import { TouchableWithoutFeedback } from 'react-native'
 
 const fadeIn = {
@@ -57,7 +58,7 @@ const Overlay = ({
           position: 'absolute',
           left: 0,
           top: 0,
-          backgroundColor: 'black',
+          backgroundColor: COLORS.black,
         }}
       />
     </TouchableWithoutFeedback>

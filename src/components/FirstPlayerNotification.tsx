@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { useAppDispatch, useAppSelector } from '../hooks'
 
-import colors from '../constants/colors'
+import { COLORS } from '../constants/colors'
 import { setFirstPlayer } from '../features/game/game'
 
 const FirstPlayerNotification = ({
@@ -58,8 +58,8 @@ const FirstPlayerNotification = ({
             borderRadius: 100,
             width: 120,
             textAlign: 'center',
-            backgroundColor: colors.defaultDark.secondaryColor,
-            color: colors.defaultDark.mainColor,
+            backgroundColor: COLORS.black,
+            color: COLORS.white,
             borderWidth: 2,
           },
         ]}>
